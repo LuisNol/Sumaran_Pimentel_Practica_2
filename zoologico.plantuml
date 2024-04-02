@@ -1,0 +1,53 @@
+@startuml
+
+class Animal {
+  - nombre: string
+}
+
+class Especie {
+  - nombre: string
+}
+
+class Recinto {
+  - nombre: string
+}
+
+class Cuidador {
+  - nombre: string
+  - especialidad: string
+}
+
+class Actividad {
+  - nombre: string
+  - dia: string
+  - horario: string
+}
+
+class Cuidadores_Tipo_Especie {
+  - id: int
+  - cuidador_id: int
+  - especie_id: int
+}
+
+class actividades_animales {
+  - id: int
+  - actividad_id: int
+  - animal_id: int
+}
+
+Animal "1" *-- "1" Especie : pertenece a
+
+Especie "1" *-- "1" Recinto : asociada con
+
+Recinto "1" *-- "*" Animal : alberga
+
+Cuidador "1" *-- "*" Animal : a cargo de
+
+
+Cuidador "1" -- "0..*" Cuidadores_Tipo_Especie : tiene
+Especie "1" -- "0..*" Cuidadores_Tipo_Especie : pertenece a
+
+Actividad "0..*" *-- "*" actividades_animales : incluye
+Animal "0..*" *-- "*" actividades_animales : incluido en
+
+@enduml
